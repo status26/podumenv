@@ -111,17 +111,6 @@ check_composer(){
     fi    
 }
 
-check_els_service(){
-	echoG 'Check elasticsearch service:'
-	service elasticsearch status | grep 'running' | grep -v 'not'
-	if [ ${?} = 0 ]; then 
-		echoG 'elasticsearch is running'
-	else
-		echoR 'elasticsearch is not running, start it!'
-		service elasticsearch start
-	fi
-}
-
 check_git(){
 	if [ ! -e /usr/bin/git ]; then
 		echoG 'git package not exist, please check!'
@@ -806,7 +795,6 @@ main(){
 	    #prevent_php
 		check_memory
 		check_composer
-		#check_els_service
 		check_git
 		app_magento_dl
 		install_magento

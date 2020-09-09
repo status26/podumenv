@@ -104,7 +104,6 @@ install_packages(){
     elif [ "${1}" = 'magento' ]; then
         docker-compose exec litespeed /bin/bash -c "pkginstallctl.sh --package composer"
         docker-compose exec litespeed /bin/bash -c "pkginstallctl.sh --package systemd"
-        docker-compose exec litespeed /bin/bash -c "pkginstallctl.sh --package elasticsearch"
         docker-compose exec litespeed /bin/bash -c "pkginstallctl.sh --package unzip"
         docker-compose exec litespeed /bin/bash -c "pkginstallctl.sh --package git"
     fi    

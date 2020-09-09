@@ -74,25 +74,6 @@ install_systemd(){
     fi		
 }
 
-install_elasticsearch(){
-    if [ ! -e /etc/elasticsearch ]; then
-        apt-get install -y gnupg2 >/dev/null 2>&1
-        curl -fsSL https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - >/dev/null 2>&1
-        echo "deb https://artifacts.elastic.co/packages/7.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-7.x.list >/dev/null 2>&1
-        apt update >/dev/null 2>&1
-        apt install elasticsearch -y >/dev/null 2>&1
-        echoG 'Start elasticsearch service'
-        service elasticsearch start >/dev/null 2>&1
-        if [ ${?} != 0 ]; then
-            echoR 'Issue with elasticsearch package, Please check!'
-            exit 1
-        fi
-        systemctl enable elasticsearch >/dev/null 2>&1
-    else
-        echoG 'Elasticsearch already exist, skip!'
-    fi     
-}
-
 install_git(){
 	if [ ! -e /usr/bin/git ]; then
 		echoG 'Install git'
